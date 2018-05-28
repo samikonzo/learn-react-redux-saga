@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers.js'
 import createSagaMiddleware from 'redux-saga'
-import { watcherSaga } from './sagas.js'
+import { watcherSagaUser, watcherSagaImg } from './sagas.js'
 
 let sagaMiddleware = createSagaMiddleware()
 
 let store = createStore(rootReducer, applyMiddleware(sagaMiddleware))
 
-sagaMiddleware.run(watcherSaga)
+sagaMiddleware.run(watcherSagaUser)
+sagaMiddleware.run(watcherSagaImg)
 
 export default store

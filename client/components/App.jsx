@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import User from '../containers/User.jsx'
+import Img from '../containers/Img.jsx'
 
 
 class App extends Component {
@@ -7,6 +8,7 @@ class App extends Component {
 		return (
 			<div>
 				<User />
+				<Img />
 			</div>
 		);
 	}

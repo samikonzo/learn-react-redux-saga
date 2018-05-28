@@ -24,13 +24,33 @@ export let userGetDataFail = (error) => {
 	}
 }
 
+export let imageGet = () => {
+	return {
+		type: Constants.IMAGE_GET,
+	}
+}
 
+export let imgGetSuccess = (imgLink) => {
+	return {
+		type: Constants.IMAGE_GET_SUCCESS,
+		payload: imgLink
+	}
+}
+export let imgGetFail = (error) => {
+	return {
+		type: Constants.IMAGE_GET_FAIL,
+		payload: error,
+	}
+}
 
 
 let actions = {
 	userGetData,
 	userGetDataSuccess,
 	userGetDataFail,
+	imageGet,
+	imgGetSuccess,
+	imgGetFail,
 }
 
 export default actions

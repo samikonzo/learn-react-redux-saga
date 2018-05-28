@@ -5,8 +5,12 @@ import Actions from './actions.js'
 let l = console.log
 
 
-export function* watcherSaga(){
-	yield takeLatest(Constants.USER_GET_DATA, workerSaga)
+export function* watcherSagaUser(){
+	yield takeLatest(Constants.USER_GET_DATA, workerSagaUser)
+}
+
+export function* watcherSagaImg() {
+	yield takeLatest(Constants.IMAGE_GET, workerSagaImg)
 }
 
 function fetchUserData(id){
@@ -18,14 +22,31 @@ function fetchUserData(id){
 		.catch(error => error.text())
 }
 
-function* workerSaga(action){
+function* workerSagaUser(action){
 	try{
 		const data = yield call(fetchUserData, action.payload)
-		l(data)
-
 		yield put(Actions.userGetDataSuccess(data))
 
 	} catch(error) {
 		yield put(Actions.userGetDataFail(error))
+	}
+}
+
+
+function fetchImg(){
+	return fetch('/img', { method: 'GET' })
+		.then(res => {
+			if(!res.ok) throw res
+			return res.text()
+		})
+		.catch(error =>  error.text() )
+}
+
+function* workerSagaImg(){
+	try{
+		let imgLink = yield call(fetchImg)
+		yield put (Actions.imgGetSuccess(imgLink))
+	} catch(e) {
+		yield put (Actions.imgGetFail(e))
 	}
 }
